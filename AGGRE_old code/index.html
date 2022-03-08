@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>RhinoCompute: GH SubD Object</title>
+        <style>
+            .slidecontainer {
+                position: absolute;
+                background: none;
+                width: 25%;
+                margin-top: 50px;
+                margin-left: 10px;
+
+            }
+
+            .slider {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 10px;
+                border-radius: 5px;
+                background: #00d9ff;
+                outline: solid gray 1px;
+                opacity: 0.5;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+            }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 25%; /* 0% makes it a square, 50% a circle*/ 
+                background: #1557a3;
+                cursor: pointer;
+            }
+
+
+            body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(255, 255, 0);}
+
+            #overlay {z-index: 1; width: 100%}
+
+            #loader {
+                border: 5px solid #ffffff71; /* Light grey */
+                border-top: 5px solid #525252; /* Grey */
+                border-radius: 50%;
+                width: 80px;
+                height: 40px;
+                animation: spin 1s linear infinite;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 2;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body> <!--add style="background-color: purple" to set a background-->
+
+        <div id="loader"></div> 
+        <div class="slidecontainer">
+            <div id="overlay">
+                <div>
+                    <p><strong>Mesh growth rate</strong></p>
+                    <input type="range" id="count" name="count" min="1" max="5" value="1.5" step="0.1" class="slider">
+                    <!-- <input type="range" id="count" name="count" min="1" max="50" value="10" step="1"> -->
+                    <!-- <p>Value: <span id="demo"></span></p> -->
+                </div>
+                <div>
+                    <p><strong></strong>Base sphere radius</strong></p>
+                    <input type="range" id="radius" name="radius" min="5" max="20" value="12" step="1" class="slider">
+                    <!-- <input type="range" id="radius" name="radius" min="1" max="10" value="7" step="1"> -->
+                    <!-- <label for="radius">Base sphere radius</label> -->
+                </div>
+                <div>
+                    <p><strong>Cage thickness</strong></p>
+                    <input type="range" id="thickness" name="thickness" min="0.2" max="1.5" value="0.7" step="0.1" class="slider">
+                    <!-- <input type="range" id="thickness" name="thickness" min="0.1" max="1.1" value="0.5" step="0.1"> -->
+                    <!-- <label for="thickness">Cage thickness</label> -->
+                </div>
+
+
+            </div>
+        </div>
+        
+
+
+        <script type="module" src="script.js"></script>
+    </body>
+</html>
