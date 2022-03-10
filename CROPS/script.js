@@ -6,7 +6,7 @@ import { RhinoCompute } from 'https://cdn.jsdelivr.net/npm/compute-rhino3d@0.13.
 import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.124.0/examples/jsm/loaders/3DMLoader.js'
 
 //GH script
-const definitionName = '220227_Spatial greenhouse.gh'
+const definitionName = '220227_Spatial greenhouse_test02.gh'
 
 //Initial diagram values
 var skinVal = 1;

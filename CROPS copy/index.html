@@ -68,21 +68,25 @@
             <div id="overlay">
                 <div>
                     <p><strong>Number of modules</strong></p>
-                    <input type="range" id="Modules" name="Modules" min="1" max="32" value="4" step="1" class="slider" oninput="this.nextElementSibling.value = this.value">
-                    <output>4</output>
+                    <input type="range" id="Modules" name="Modules" min="1" max="32" value="4" step="1" class="slider">
+                    <p><span id="modVal"></span></p>
+                    <!-- <input type="range" id="Modules" name="Modules" min="1" max="32" value="4" step="1" class="slider" oninput="this.nextElementSibling.value = this.value"> -->
+                    <!-- <output>4</output> -->
                     <!-- <input type="range" id="count" name="count" min="1" max="50" value="10" step="1"> -->
                     <!-- <p>Value: <span id="demo"></span></p> -->
                 </div>
                 <div>
                     <p><strong>Number of astronauts</strong></p>
-                    <input type="range" id="Astronauts" name="Astronauts" min="6" max="148" value="6" step="1" class="slider" oninput="this.nextElementSibling.value = this.value">
-                    <output>6</output>
+                    <input type="range" id="Astronauts" name="Astronauts" min="6" max="148" value="6" step="1" class="slider">
+                    <p><span id="astVal"></span></p>
+                    <!-- <input type="range" id="Astronauts" name="Astronauts" min="6" max="148" value="6" step="1" class="slider" oninput="this.nextElementSibling.value = this.value"> -->
+                    <!-- <output>6</output> -->
                     <!-- <input type="range" id="radius" name="radius" min="1" max="10" value="7" step="1"> -->
                     <!-- <label for="radius">Base sphere radius</label> -->
                 </div>
 
                 <div>
-                    <p><strong>Percentage of food per astronaut</strong></p>
+                    <p><strong>Percentage of food produced per astronaut</strong></p>
                 </div>
                 <h3><div id="percentage"></div></h3>
 
@@ -94,3 +98,6 @@
         <script type="module" src="script.js"></script>
     </body>
 </html>
+
+
+<!--when changing the astronauts slider the script recomputes but i want it not to do so as is sometihng exclusive from js.

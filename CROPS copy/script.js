@@ -9,17 +9,30 @@ const definitionName = '220227_Spatial greenhouse.gh'
 
 // Set up sliders
 const Modules_slider = document.getElementById('Modules')
-Modules_slider.addEventListener('mouseup', onSliderChange, false)
-Modules_slider.addEventListener('touchend', onSliderChange, false)
-// How do I change the slider background?
-//radius_slider.background = new THREE.Color("rgb(255, 0, 255)")
+Modules_slider.addEventListener('mouseup', ModsonSliderChange, false)
+Modules_slider.addEventListener('touchend', ModsonSliderChange, false)
 
 const Astronauts_slider = document.getElementById('Astronauts')
-Astronauts_slider.addEventListener('mouseup', onSliderChange, false)
-Astronauts_slider.addEventListener('touchend', onSliderChange, false)
+Astronauts_slider.addEventListener('mouseup', AstonSliderChange, false)
+Astronauts_slider.addEventListener('touchend', AstonSliderChange, false)
+
+
+//Can these two functions be combined in one or improved? They display the slider value 
+var modOut = document.getElementById("modVal");
+modOut.innerHTML = Modules_slider.value;
+Modules_slider.oninput = function(){
+    modOut.innerHTML = this.value;
+}
+var astOut = document.getElementById("astVal");
+astOut.innerHTML = Astronauts_slider.value;
+Astronauts_slider.oninput = function(){
+    astOut.innerHTML = this.value;
+}
+
 
 const loader = new Rhino3dmLoader()
 loader.setLibraryPath('https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/')
+
 
 let rhino, definition, doc
 rhino3dm().then(async m => {
@@ -40,7 +53,22 @@ rhino3dm().then(async m => {
 
     init()
     compute()
+    percentage()
 })
+
+
+function percentage() {
+
+    var mods = Modules_slider.value;
+    var ast = Astronauts_slider.value;
+
+    var percentage = Math.round(mods / ast * 25 * 100) / 100
+    console.log(percentage)
+
+    document.getElementById('percentage').innerText = percentage + "%"
+}
+
+
 
 async function compute() {
 
@@ -48,18 +76,18 @@ async function compute() {
     const param1 = new RhinoCompute.Grasshopper.DataTree('Modules')
     param1.append([0], [Modules_slider.valueAsNumber])
 
-    const param2 = new RhinoCompute.Grasshopper.DataTree('Astronauts')
-    param2.append([0], [Astronauts_slider.valueAsNumber])
+    // const param2 = new RhinoCompute.Grasshopper.DataTree('Astronauts')
+    // param2.append([0], [Astronauts_slider.valueAsNumber])
 
     // clear values
     const trees = []
     trees.push(param1);
-    trees.push(param2);
+    // trees.push(param2);
 
-    var percentage = Math.round(Modules_slider.value / Astronauts_slider.value * 25 * 100) / 100
-    console.log(percentage)
+    // var percentage = Math.round(Modules_slider.value / Astronauts_slider.value * 25 * 100) / 100
+    // console.log(percentage)
 
-    document.getElementById('percentage').innerText = percentage + "%"
+    // document.getElementById('percentage').innerText = percentage + "%"
 
     const res = await RhinoCompute.Grasshopper.evaluateDefinition(
         definition, 
@@ -137,11 +165,17 @@ async function compute() {
 
 
 
-function onSliderChange() {
+function ModsonSliderChange() {
     // show spinner
     document.getElementById('loader').style.display = 'block'
     compute()
+    percentage()
 
+}
+
+function AstonSliderChange() {
+    // show spinner
+    percentage()
 }
 
 
