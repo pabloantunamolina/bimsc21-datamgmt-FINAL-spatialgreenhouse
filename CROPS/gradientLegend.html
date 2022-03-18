@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #gradient-bar {
+            height: 200px;
+            width: 15px;
+            border-radius: 10px;
+            background: linear-gradient(#da4545, #ff7e0f, #ffe218, #7cdf50, #4591da);
+        }
+
+        .card {
+            width: 300px;
+            color: white;
+        }
+
+        #legend {
+            position: relative;
+        }
+
+        .indicator {
+            position: absolute;
+            top: 0;
+            left: 30px;
+        }
+
+        .indicator::before {
+            content: "";
+            position: absolute;
+            bottom: 0.6em;
+            left: -20px;
+            right: 0px;
+            width: 1em;
+            border-top: 1.5px solid white;
+        }
+        .scale {
+            position: relative;
+        }
+
+        .card-body {
+            background-color: #2a4169;
+        }
+
+        .advice .icon {
+            fill: white;
+            margin: 0;
+        }
+
+        .sign {
+            display: inline-block;
+            padding: 8px;
+            border-radius: 50px;
+        }
+        .warning {
+            background-color: #da4545;
+        }
+        .success {
+            background-color: #6dc446;
+        }
+        .advice-text {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card align-self-center">
+                <div class="card-body">
+                    <div id="legend">
+                        <h5 class="card-title pb-2">Legend</h5>
+                        <div class="scale">
+                            <div id="gradient-bar"></div>
+                            <div class="indicator">Very High</div>
+                            <div class="indicator">High</div>
+                            <div class="indicator">Medium</div>
+                            <div class="indicator">Low</div>
+                            <div class="indicator">Very Low</div>
+                        </div>
+                        <h5 class="pt-3">Advice</h5>
+                        <div class="advice">
+                            <div class="warning sign"><svg class="icon" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" />
+                                </svg>
+                            </div>
+                            <p class="advice-text">Health Risk</p>
+                        </div>
+                        <div class="advice">
+                            <div class="success sign">
+                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
+                                </svg>
+                            </div>
+                            <p class="advice-text">Good movement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var gradientBar = document.getElementById("gradient-bar");
+        var barHeight = gradientBar.offsetHeight;
+        var indicators = document.getElementsByClassName("indicator");
+        var numberOfIndicators = indicators.length;
+        var counter = 0;
+        for (var x = 0; x < numberOfIndicators; x++) {
+            indicators[x].style.top = counter + "px";
+            counter += barHeight / numberOfIndicators + 3;
+        }
+    </script>
+</body>
+</html>

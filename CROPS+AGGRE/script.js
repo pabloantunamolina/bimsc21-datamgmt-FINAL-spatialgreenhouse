@@ -6,7 +6,7 @@ import { RhinoCompute } from 'https://cdn.jsdelivr.net/npm/compute-rhino3d@0.13.
 import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.124.0/examples/jsm/loaders/3DMLoader.js'
 
 //GH script
-const definitionName = '220227_Spatial greenhouse.gh'
+const definitionName = '220227_Spatial greenhouse+aggregation.gh'
 
 
 // //SET UP SLIDERS AND EVENT LISTENERS
@@ -19,9 +19,12 @@ const definitionName = '220227_Spatial greenhouse.gh'
 // root_slider.addEventListener('mouseup', onSliderChange, false)
 // root_slider.addEventListener('touchend', onSliderChange, false)
 
-const modules_slider = document.getElementById('modules')
-
-const root_slider = document.getElementById('root')
+const modules_slider = document.getElementById('modules');
+modules_slider.addEventListener('mouseup', onSliderChange, false)
+modules_slider.addEventListener('touchend', onSliderChange, false)
+const root_slider = document.getElementById('root');
+root_slider.addEventListener('mouseup', onSliderChange, false)
+root_slider.addEventListener('touchend', onSliderChange, false)
 
 var modOut = document.getElementById("modVal");
 modOut.innerHTML = modules_slider.value;
@@ -34,12 +37,30 @@ root_slider.oninput = function(){
     rootOut.innerHTML = this.value;
 }
 
+const aggregation = document.getElementById('aggregation');
+
+const agg_slider = document.getElementById('agg');
+const ast_slider = document.getElementById('ast');
+ast_slider.addEventListener('mouseup', AstonSliderChange, false);
+ast_slider.addEventListener('touchend', AstonSliderChange, false);
+
+// var aggOut = document.getElementById("aggVal");
+// aggOut.innerHTML = agg_slider.value;
+// agg_slider.oninput = function(){
+//     aggOut.innerHTML = this.value;
+// }
+// var astOut = document.getElementById("astVal");
+// astOut.innerHTML = ast_slider.value;
+// ast_slider.oninput = function(){
+//     astOut.innerHTML = this.value;
+// }
+
 //Initial diagram values
 var skinVal = 1;
 var potVal = 0;
 
 //Gradient legend
-var gradientBar = document.getElementById("gradient-temp");
+var gradientBar = document.getElementById("gradient-roots");
 var barHeight = gradientBar.offsetHeight;
 var indicators = document.getElementsByClassName("indicator");
 var numberOfIndicators = indicators.length;
@@ -122,8 +143,19 @@ rhino3dm().then(async m => {
 
     init()
     compute()
+    percentage()
 })
 
+function percentage() {
+
+    var mods = agg_slider.value;
+    var ast = ast_slider.value;
+
+    var percentage = Math.round(mods / ast * 25 * 100) / 100
+    // console.log(percentage)
+
+    document.getElementById('percentage').innerText = percentage + "%"
+}
 
 function run() {
 
@@ -143,8 +175,19 @@ function run() {
 
     document.getElementById('loader').style.display = 'block'
     compute()
+    percentage()
+
 }
 
+function AstonSliderChange() {
+    // show spinner
+    percentage()
+}
+
+//Uncheck aggregation checkbox when initial sliders change
+function onSliderChange() {
+    document.getElementById("aggregation").checked = false;
+}
 
 // function onSliderChange() {
 //     // show spinner
@@ -181,15 +224,23 @@ function run() {
 async function compute() {
 
     //Slider parameters
-    const param1 = new RhinoCompute.Grasshopper.DataTree('modules')
-    param1.append([0], [modules_slider.valueAsNumber])
-    const param2 = new RhinoCompute.Grasshopper.DataTree('root')
-    param2.append([0], [root_slider.valueAsNumber])
+    const param1 = new RhinoCompute.Grasshopper.DataTree('modules');
+    param1.append([0], [modules_slider.valueAsNumber]);
+    const param2 = new RhinoCompute.Grasshopper.DataTree('root');
+    param2.append([0], [root_slider.valueAsNumber]);
     //Diagram button parameters
-    const param3 = new RhinoCompute.Grasshopper.DataTree('skin')
-    param3.append([0], [skinVal])
-    const param4 = new RhinoCompute.Grasshopper.DataTree('diagrams')
-    param4.append([0], [potVal])
+    const param3 = new RhinoCompute.Grasshopper.DataTree('skin');
+    param3.append([0], [skinVal]);
+    const param4 = new RhinoCompute.Grasshopper.DataTree('diagrams');
+    param4.append([0], [potVal]);
+    
+    //Aggregation
+    //Checkbox
+    const param5 = new RhinoCompute.Grasshopper.DataTree('aggregation');
+    param5.append([0], [aggregation.checked]);
+    //Slider
+    const param6 = new RhinoCompute.Grasshopper.DataTree('agg');
+    param6.append([0], [agg_slider.valueAsNumber]);
 
 
     // clear values
@@ -198,6 +249,8 @@ async function compute() {
     trees.push(param2);
     trees.push(param3);
     trees.push(param4);
+    trees.push(param5);
+    trees.push(param6);
 
     const res = await RhinoCompute.Grasshopper.evaluateDefinition(
         definition, 

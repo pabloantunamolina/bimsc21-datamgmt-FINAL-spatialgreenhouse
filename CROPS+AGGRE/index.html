@@ -7,8 +7,8 @@
             .slidecontainer {
                 position: absolute;
                 background: none;
-                width: 25%;
-                margin-top: 50px;
+                width: 20%;
+                margin-top: 20px;
                 margin-left: 10px;
 
             }
@@ -16,11 +16,11 @@
             .slider {
                 -webkit-appearance: none;
                 width: 100%;
-                height: 10px;
+                height: 5px;
                 border-radius: 5px;
-                background: #00d9ff;
-                outline: solid gray 1px;
-                opacity: 0.5;
+                background: #b9b9b9;
+                /* outline: solid gray 1px; */
+                opacity: 0.75;
                 -webkit-transition: .2s;
                 transition: opacity .2s;
             }
@@ -30,15 +30,15 @@
             }
 
             .slider::-moz-range-thumb {
-                width: 20px;
-                height: 20px;
-                border-radius: 25%; /* 0% makes it a square, 50% a circle*/ 
-                background: #1557a3;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%; /* 0% makes it a square, 50% a circle*/ 
+                background: #ffffff;
                 cursor: pointer;
             }
 
 
-            body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(0, 0, 0);}
+            body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(255, 255, 255);}
 
             #overlay {z-index: 1; width: 100%}
 
@@ -75,6 +75,7 @@
                 padding: 5px 5px;
                 font-family: sans-serif, Arial;
                 font-size: 10px;
+                color: #000000;
                 border-radius: 8px;
                 width: 20%;
                 text-align: center;
@@ -85,100 +86,50 @@
                 cursor: pointer;
             }
             
-            /* USE CLASSES FOR SETTING THE RADIO.TOOLBAR TYPE */
             .radio-toolbar input[type="radio"]:checked + label {
-                background-color: rgb(0, 0, 0);
-                color: white;
-                border: 1px solid white;
-                width: 20%;
+                background-color: rgb(255, 255, 0);
                 text-align: center;
             }
-            /* .radio-toolbar input[type="radio"],input[value = "1"]:checked + label {
-                background-color: cyan;
-                color: black;
-                border: 2px solid white;
-            }
-            .radio-toolbar input[type="radio"],input[value = "2"]:checked + label {
-                background-color: blue;
-                color: black;
-                border: 2px solid white;
-            }
-            .radio-toolbar input[type="radio"],input[value = "3"]:checked + label {
-                background-color: rgb(255, 0, 0);
-                color:black;
-                border: 2px solid white;
-            }
-            .radio-toolbar input[type="radio"],input[value = "4"]:checked + label {
-                background-color: rgb(217, 255, 0);
-                color: black;
-                border: 2px solid white;
-            }
-            .radio-toolbar input[type="radio"],input[value = "5"]:checked + label {
-                background-color: blue;
-                color: black;
-                border: 2px solid white;
-            }
-            .radio-toolbar input[type="radio"],input[value = "6"]:checked + label {
-                background-color: rgb(255, 0, 0);
-                color:black;
-                border: 2px solid white;
-            }
-            .radio-toolbar input[type="radio"],input[value = "7"]:checked + label {
-                background-color: rgb(217, 255, 0);
-                color: black;
-                border: 2px solid white;
-            } */
-
-            /* .radiolabel
-            {
-                font-size: 10px;
-                display: inline-block;
-                text-align: left;
-                width: 40px;
-                font-weight: bold;
-                /* color: white; */
-            /* } */
 
             /* BOXES LEGEND */
             .legend { list-style: none; }
             .legend li { float: left; margin-right: 10px; }
             .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 10px; margin: 2px; }
             /* your colors */
-            .legend .superawesome { background-color: #ff00ff; }
-            .legend .awesome { background-color: #00ffff; }
-            .legend .kindaawesome { background-color: #0000ff; }
-            .legend .notawesome { background-color: #000000; }
+            .legend .temp1 { background-color: #00FFBB; }
+            .legend .temp2 { background-color: #FFD500; }
+            .legend .temp3 { background-color: #FF0000; }
+            .legend .ph5 { background-color: #ff0000; }
+            .legend .ph6 { background-color: #ffa500; }
+            .legend .ph7 { background-color: #ffffff; }
+            .legend .prot { background-color: #ff0000; }
+            .legend .oils { background-color: #00ff00; }
+            .legend .carbs { background-color: #ffff00; }
+            .legend .flavour { background-color: #ff9600; }
+            .legend .water { background-color: #0000ff; }
+            .legend .health { background-color: #ff00ff; }
             
             /* GRADIENT LEGEND */
-            #gradient-temp {
-            height: 10px;
-            width: 40%;
-            border-radius: 10px;
-            background: linear-gradient(to right, #7cdf50, #4591da);
-            }
-            #gradient-ph {
-            height: 10px;
-            width: 40%;
-            border-radius: 10px;
-            background: linear-gradient(to right, #da4545, #ff7e0f);
-            }
             #gradient-roots {
-            height: 10px;
-            width: 40%;
+            height: 5px;
+            width: 100%;
             border-radius: 10px;
-            background: linear-gradient(to right, #ffe218, #7cdf50);
+            border: 1px solid white;
+            background: linear-gradient(to right, #006400, #90ee90, #7fffd4, #e6e6fa);
             }
             #gradient-water {
-            height: 10px;
-            width: 40%;
+            height: 5px;
+            width: 100%;
             border-radius: 10px;
-            background: linear-gradient(to right, #da4545, #ff7e0f, #4591da);
+            border: 1px solid white;
+            background: linear-gradient(to right, #ffffff, #000078);
             }
             #gradient-height {
-            height: 10px;
-            width: 40%;
+            height: 5px;
+            width: 100%;
             border-radius: 10px;
-            background: linear-gradient(to right, #da4545, #ff7e0f, #ffe218);
+            border: 1px solid white;
+            background: linear-gradient(to right, #ffffff, #000000);
             }
             /* .card {
             width: 300px;
@@ -206,20 +157,22 @@
             }
         </style>
     </head>
-    <body style="background-color: white;"> <!--add style="background-color: purple" to set a background-->
+    <body style="background-color: rgb(0, 0, 0);"> <!--add style="background-color: purple" to set a background-->
 
         <div id="loader"></div> 
         <div class="slidecontainer">
-            <div id="overlay" style="background-color:rgba(255, 255, 255, 0.651);">
+
+            <div id="overlay" style="background-color:rgba(0, 0, 0, 0.65);"> <!--style="background-color:rgba(255, 255, 255, 0.65-->
+                <div><h3>MODULE DESIGN</h3></div>
                 <div>
-                    <p><strong>Number of modules</strong></p>
+                    <strong>Number of modules</strong>
                     <input type="range" id="modules" name="modules" min="1" max="4" value="1" step="1" class="slider">
-                    <p><span id="modVal"></span></p><br>
+                    <span id="modVal"></span><br>
                     <!-- <input type="range" id="count" name="count" min="1" max="50" value="10" step="1"> -->
                     <!-- <p>Value: <span id="demo"></span></p> -->
-                    <p><strong>Maximum root length</strong></p>
+                    <strong>Maximum root length</strong>
                     <input type="range" id="root" name="root" min="0.5" max="2.0" value="2.0" step="0.1" class="slider">
-                    <p><span id="rootVal"></span></p>
+                    <span id="rootVal"></span>
                     <!-- <input type="range" id="radius" name="radius" min="1" max="10" value="7" step="1"> -->
                     <!-- <label for="radius">Base sphere radius</label> -->
                 </div>
@@ -230,7 +183,7 @@
                     <label for="opaque">Facade</label>
 
                     <input type="radio" id="frame" name="outerSkin" value="1" checked>
-                    <label for="frame">Structural frame</label> 
+                    <label for="frame">Str. frame</label> 
                     
                     <input type="radio" id="nothing1" name="outerSkin" value="2">
                     <label for="nothing1">Nothing</label> 
@@ -265,38 +218,26 @@
 
                 <!--BOXES LEGEND-->
                 <div class="legend">
-                    <li><span class="superawesome"></span> Super Awesome</li>
-                    <li><span class="awesome"></span> Awesome</li>
-                    <li><span class="kindaawesome"></span> Kinda Awesome</li>
-                    <li><span class="notawesome"></span> Not Awesome</li>
-                </div>
+                    <div><strong>Average temperature</strong></div>
+                    <li><span class="temp1"></span>14.5-18ºC</li>
+                    <li><span class="temp2"></span>18-21.5ºC</li>
+                    <li><span class="temp3"></span>21.5-25ºC</li>
+
+                </div><br><br>
+
+                <div class="legend">
+                    <div><strong>PH</strong></div>
+                    <li><span class="ph5"></span>5</li>
+                    <li><span class="ph6"></span>6</li>
+                    <li><span class="ph7"></span>7</li>
+
+                </div><br><br>
 
                 <!--GRADIENT LEGEND-->
                 <div class="row justify-content-center">
                     <div class="card align-self-center">
                         <div class="card-body">
-                            <div id="legend"><strong>Legends</strong></div>
-                            <div>Average temperature (ºC)
-                                <div class="scale">
-                                    <div id="gradient-temp"></div>
-                                    <!-- <div class="indicator">Very High</div>
-                                    <div class="indicator">High</div>
-                                    <div class="indicator">Medium</div>
-                                    <div class="indicator">Low</div>
-                                    <div class="indicator">Very Low</div> -->
-                                </div>
-                            </div>
-                            <div>Soil PH
-                                <div class="scale">
-                                    <div id="gradient-ph"></div>
-                                    <!-- <div class="indicator">Very High</div>
-                                    <div class="indicator">High</div>
-                                    <div class="indicator">Medium</div>
-                                    <div class="indicator">Low</div>
-                                    <div class="indicator">Very Low</div> -->
-                                </div>
-                            </div>
-                            <div>Root length (m)
+                            <div><strong>Root length (m)</strong>
                                 <div class="scale">
                                     <div id="gradient-roots"></div>
                                     <!-- <div class="indicator">Very High</div>
@@ -305,8 +246,8 @@
                                     <div class="indicator">Low</div>
                                     <div class="indicator">Very Low</div> -->
                                 </div>
-                            </div>
-                            <div>Water needs (mm)
+                            </div><br>
+                            <div><strong>Water needs (mm)</strong>
                                 <div class="scale">
                                     <div id="gradient-water"></div>
                                     <!-- <div class="indicator">Very High</div>
@@ -315,8 +256,8 @@
                                     <div class="indicator">Low</div>
                                     <div class="indicator">Very Low</div> -->
                                 </div>
-                            </div>
-                            <div>Plant height (m)
+                            </div><br>
+                            <div><strong>Plant height (m)</strong>
                                 <div class="scale">
                                     <div id="gradient-height"></div>
                                     <!-- <div class="indicator">Very High</div>
@@ -325,10 +266,43 @@
                                     <div class="indicator">Low</div>
                                     <div class="indicator">Very Low</div> -->
                                 </div>
-                            </div>
+                            </div><br>
                         </div>
                     </div>
                 </div>
+
+                <div class="legend">
+                    <div><strong>Nutrient type</strong></div>
+                    <li><span class="prot"></span>Proteins</li>
+                    <li><span class="oils"></span>Oils</li>
+                    <li><span class="carbs"></span>Carbs</li>
+                    <li><span class="flavour"></span>Flavour</li>
+                    <li><span class="water"></span>Fibre</li>
+                    <li><span class="health"></span>Health</li>
+
+                </div><br><br><br>
+
+                <div id="aggCheck">
+                    <div><h3>AGGREGATION</h3></div>
+                    <label for="aggregation"><strong>Aggregate?</strong></label>
+                    <input type="checkbox" id="aggregation">
+                </div><br>
+
+                <div>
+                    <strong>Number of modules to aggregate</strong>
+                    <input type="range" id="agg" name="agg" min="1" max="97" value="1" step="1" class="slider">
+                    <!-- <p><span id="aggVal"></span></p><br> -->
+
+                    <strong>Number of astronauts</strong>
+                    <input type="range" id="ast" name="ast" min="6" max="148" value="6" step="1" class="slider">
+                    <!-- <p><span id="astVal"></span></p> -->
+
+                </div>
+
+                <div>
+                    <p><strong>Percentage of food produced per astronaut</strong></p>
+                </div>
+                <h3><div id="percentage"></div></h3>
 
                 <div id="ui">
                     <button id="runButton" onclick="run()">Compute</button><br>
