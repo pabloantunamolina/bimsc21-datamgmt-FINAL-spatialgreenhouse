@@ -44,16 +44,16 @@ const ast_slider = document.getElementById('ast');
 ast_slider.addEventListener('mouseup', AstonSliderChange, false);
 ast_slider.addEventListener('touchend', AstonSliderChange, false);
 
-// var aggOut = document.getElementById("aggVal");
-// aggOut.innerHTML = agg_slider.value;
-// agg_slider.oninput = function(){
-//     aggOut.innerHTML = this.value;
-// }
-// var astOut = document.getElementById("astVal");
-// astOut.innerHTML = ast_slider.value;
-// ast_slider.oninput = function(){
-//     astOut.innerHTML = this.value;
-// }
+var aggOut = document.getElementById("aggVal");
+aggOut.innerHTML = agg_slider.value;
+agg_slider.oninput = function(){
+    aggOut.innerHTML = this.value;
+}
+var astOut = document.getElementById("astVal");
+astOut.innerHTML = ast_slider.value;
+ast_slider.oninput = function(){
+    astOut.innerHTML = this.value;
+}
 
 //Initial diagram values
 var skinVal = 1;
@@ -157,16 +157,31 @@ function percentage() {
     document.getElementById('percentage').innerText = percentage + "%"
 }
 
+
+const outerButtons = document.querySelectorAll('input[name="outerSkin"]');
+for (const outerButton of outerButtons) {
+    outerButton.addEventListener("click", onSliderChange);
+    if (outerButton.checked){
+        skinVal = outerButton.value;
+    }
+}
+
+const potButtons = document.querySelectorAll('input[name="innerSkin"]');
+for (const potButton of potButtons) {
+    potButton.addEventListener("click", onSliderChange);
+    if (potButton.checked){
+        potVal = potButton.value;
+    }
+}
+
 function run() {
 
-    const outerButtons = document.querySelectorAll('input[name="outerSkin"]');
     for (const outerButton of outerButtons){
         if (outerButton.checked){
             skinVal = outerButton.value;
         }
     }
-    
-    const potButtons = document.querySelectorAll('input[name="innerSkin"]');
+
     for (const potButton of potButtons){
         if (potButton.checked){
             potVal = potButton.value;
@@ -176,7 +191,6 @@ function run() {
     document.getElementById('loader').style.display = 'block'
     compute()
     percentage()
-
 }
 
 function AstonSliderChange() {
@@ -184,17 +198,9 @@ function AstonSliderChange() {
     percentage()
 }
 
-//Uncheck aggregation checkbox when initial sliders change
 function onSliderChange() {
     document.getElementById("aggregation").checked = false;
 }
-
-// function onSliderChange() {
-//     // show spinner
-//     document.getElementById('loader').style.display = 'block'
-//     compute()
-
-// }
 
 
 // //Function for diagram buttons
@@ -340,11 +346,12 @@ async function compute() {
 
     //Enable download button
     downloadButton.disabled = false;
+    runButton.disabled = false;
 
 }
 
 
-//CAN I DOWNLOAD ALL THE DIAGRAMS? COULD I COLOR THE MESHES IN THREE.js OR IS IT GOING TO BE A PAIN?
+//Download button
 function download (){
     let buffer = doc.toByteArray()
     let blob = new Blob([ buffer ], { type: "application/octect-stream" })

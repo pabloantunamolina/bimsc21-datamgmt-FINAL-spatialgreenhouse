@@ -4,11 +4,15 @@
         <meta charset="utf-8">
         <title>Spatial greenhouse, aka: GO VEGAN!</title>
         <style>
+            #sideBar {
+                padding: 5px;
+            }
+
             .slidecontainer {
                 position: absolute;
                 background: none;
                 width: 20%;
-                margin-top: 20px;
+                margin-top: 10px;
                 margin-left: 10px;
 
             }
@@ -60,9 +64,9 @@
                 100% { transform: rotate(360deg); }
             }
 
-            .radio-toolbar {
+            /* .radio-toolbar {
                 margin: 5px;
-            }
+            } */
 
             /*hide circular radio buttons*/
             .radio-toolbar input[type="radio"] {
@@ -131,13 +135,7 @@
             border: 1px solid white;
             background: linear-gradient(to right, #ffffff, #000000);
             }
-            /* .card {
-            width: 300px;
-            color: rgb(0, 0, 0);
-            } */
-            /* #legend {
-                position: relative;
-            } */
+
             .indicator {
                 position: absolute;
                 top: 0;
@@ -155,6 +153,78 @@
             .scale {
                 position: relative;
             }
+
+            /* CHECKBOX */
+             /* Customize the label (the container) */
+            .container {
+                display: block;
+                position: relative;
+                padding-top: 3px;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /* Hide the browser's default checkbox */
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            /* Create a custom checkbox */
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 20px;
+                width: 30px;
+                background-color: #eee;
+                border-radius: 8px;
+            }
+
+            /* On mouse-over, add a grey background color */
+            .container:hover input ~ .checkmark {
+                background-color: #ccc;
+            }
+
+            /* When the checkbox is checked, add a blue background */
+            .container input:checked ~ .checkmark {
+                background-color: rgb(255, 255, 0);
+                border-radius: 8px;
+            }
+
+            /* Create the checkmark/indicator (hidden when not checked) */
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+
+            /* Show the checkmark when checked */
+            .container input:checked ~ .checkmark:after {
+                display: block;
+            }
+            
+            /* Style the checkmark/indicator */
+            .container .checkmark:after {
+                left: 11px;
+                top: 0px;
+                width: 7px;
+                height: 15px;
+                border: solid rgb(0, 0, 0);
+                border-width: 0 1px 1px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
         </style>
     </head>
     <body style="background-color: rgb(0, 0, 0);"> <!--add style="background-color: purple" to set a background-->
@@ -162,7 +232,7 @@
         <div id="loader"></div> 
         <div class="slidecontainer">
 
-            <div id="overlay" style="background-color:rgba(0, 0, 0, 0.65);"> <!--style="background-color:rgba(255, 255, 255, 0.65-->
+            <div id="sideBar" style="background-color:rgba(0, 0, 0, 0.65);"> <!--style="background-color:rgba(255, 255, 255, 0.65-->
                 <div><h3>MODULE DESIGN</h3></div>
                 <div>
                     <strong>Number of modules</strong>
@@ -214,8 +284,9 @@
 
                     <input type="radio" id="nothing2" name="innerSkin" value="7">
                     <label for="nothing2">Nothing</label> 
-                </div>
+                </div><br>
 
+                <div><strong>LEGENDS</strong></div>
                 <!--BOXES LEGEND-->
                 <div class="legend">
                     <div><strong>Average temperature</strong></div>
@@ -237,7 +308,7 @@
                 <div class="row justify-content-center">
                     <div class="card align-self-center">
                         <div class="card-body">
-                            <div><strong>Root length (m)</strong>
+                            <div><strong>Root length </strong>(0.15m to 2.00m)
                                 <div class="scale">
                                     <div id="gradient-roots"></div>
                                     <!-- <div class="indicator">Very High</div>
@@ -247,7 +318,7 @@
                                     <div class="indicator">Very Low</div> -->
                                 </div>
                             </div><br>
-                            <div><strong>Water needs (mm)</strong>
+                            <div><strong>Water needs </strong>(100mm to 1000mm)
                                 <div class="scale">
                                     <div id="gradient-water"></div>
                                     <!-- <div class="indicator">Very High</div>
@@ -257,7 +328,7 @@
                                     <div class="indicator">Very Low</div> -->
                                 </div>
                             </div><br>
-                            <div><strong>Plant height (m)</strong>
+                            <div><strong>Plant height </strong>(0.30m to 3.00m)
                                 <div class="scale">
                                     <div id="gradient-height"></div>
                                     <!-- <div class="indicator">Very High</div>
@@ -280,22 +351,36 @@
                     <li><span class="water"></span>Fibre</li>
                     <li><span class="health"></span>Health</li>
 
-                </div><br><br><br>
+                </div><br><br><br><br>
+
+                <!-- <div id="aggCheck">
+                    <div><h3>AGGREGATION</h3></div>
+                    <label for="aggregation"><strong>Aggregate?</strong>
+                        <input type="checkbox" id="aggregation">
+                    </label>
+                </div><br> -->
 
                 <div id="aggCheck">
                     <div><h3>AGGREGATION</h3></div>
-                    <label for="aggregation"><strong>Aggregate?</strong></label>
-                    <input type="checkbox" id="aggregation">
+                    <label class="container"><strong>Aggregate?</strong>
+                        <input type="checkbox" id="aggregation">
+                        <span class="checkmark"></span>
+                    </label>
                 </div><br>
+
+                <!-- <label class="container"><strong>Aggregate?</strong>
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                </label> -->
 
                 <div>
                     <strong>Number of modules to aggregate</strong>
                     <input type="range" id="agg" name="agg" min="1" max="97" value="1" step="1" class="slider">
-                    <!-- <p><span id="aggVal"></span></p><br> -->
+                    <span id="aggVal"></span><br>
 
                     <strong>Number of astronauts</strong>
                     <input type="range" id="ast" name="ast" min="6" max="148" value="6" step="1" class="slider">
-                    <!-- <p><span id="astVal"></span></p> -->
+                    <span id="astVal"></span>
 
                 </div>
 
@@ -305,8 +390,8 @@
                 <h3><div id="percentage"></div></h3>
 
                 <div id="ui">
-                    <button id="runButton" onclick="run()">Compute</button><br>
-                    <button id="downloadButton" onclick="download()">Download</button>
+                    <button id="runButton" onclick="run()" disabled>Compute</button><br>
+                    <button id="downloadButton" onclick="download()" disabled>Download</button>
                 </div>
 
             </div>
