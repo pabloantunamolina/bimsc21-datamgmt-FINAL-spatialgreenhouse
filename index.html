@@ -2,13 +2,391 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>S1 - Lecture 3</title>
+        <title>Spatial greenhouse, aka: GO VEGAN!</title>
+        <style>
+            #sideBar {
+                padding: 5px;
+            }
+
+            .slidecontainer {
+                position: absolute;
+                background: none;
+                width: 20%;
+                margin-top: 10px;
+                margin-left: 10px;
+
+            }
+
+            .slider {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 5px;
+                border-radius: 5px;
+                background: #b9b9b9;
+                /* outline: solid gray 1px; */
+                opacity: 0.75;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+            }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%; /* 0% makes it a square, 50% a circle*/ 
+                background: #ffffff;
+                cursor: pointer;
+            }
+
+
+            body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(255, 255, 255);}
+
+            #overlay {z-index: 1; width: 100%}
+
+            #loader {
+                border: 5px solid #ffffff71; /* Light grey */
+                border-top: 5px solid #525252; /* Grey */
+                border-radius: 50%;
+                width: 80px;
+                height: 40px;
+                animation: spin 1s linear infinite;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 2;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            /* .radio-toolbar {
+                margin: 5px;
+            } */
+
+            /*hide circular radio buttons*/
+            .radio-toolbar input[type="radio"] {
+                display: none;
+            }
+
+            .radio-toolbar label {
+                display: inline-block;
+                background-color: #ddd;
+                padding: 5px 5px;
+                font-family: sans-serif, Arial;
+                font-size: 10px;
+                color: #000000;
+                border-radius: 8px;
+                width: 20%;
+                text-align: center;
+            }
+
+            .radio-toolbar label:hover {
+                background-color: rgb(255, 255, 255);
+                cursor: pointer;
+            }
+            
+            .radio-toolbar input[type="radio"]:checked + label {
+                background-color: rgb(255, 255, 0);
+                text-align: center;
+            }
+
+            /* BOXES LEGEND */
+            .legend { list-style: none; }
+            .legend li { float: left; margin-right: 10px; }
+            .legend span { border: 1px solid #ccc; float: left; width: 10px; height: 10px; margin: 2px; }
+            /* your colors */
+            .legend .temp1 { background-color: #00FFBB; }
+            .legend .temp2 { background-color: #FFD500; }
+            .legend .temp3 { background-color: #FF0000; }
+            .legend .ph5 { background-color: #ff0000; }
+            .legend .ph6 { background-color: #ffa500; }
+            .legend .ph7 { background-color: #ffffff; }
+            .legend .prot { background-color: #ff0000; }
+            .legend .oils { background-color: #00ff00; }
+            .legend .carbs { background-color: #ffff00; }
+            .legend .flavour { background-color: #ff9600; }
+            .legend .water { background-color: #0000ff; }
+            .legend .health { background-color: #ff00ff; }
+            
+            /* GRADIENT LEGEND */
+            #gradient-roots {
+            height: 5px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid white;
+            background: linear-gradient(to right, #006400, #90ee90, #7fffd4, #e6e6fa);
+            }
+            #gradient-water {
+            height: 5px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid white;
+            background: linear-gradient(to right, #ffffff, #000078);
+            }
+            #gradient-height {
+            height: 5px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid white;
+            background: linear-gradient(to right, #ffffff, #000000);
+            }
+
+            .indicator {
+                position: absolute;
+                top: 0;
+                left: 25px;
+            }
+            .indicator::before {
+                content: "";
+                position: absolute;
+                bottom: 0.6em;
+                left: -20px;
+                right: 0px;
+                width: 1em;
+                border-top: 1.5px solid rgb(0, 0, 0);
+            }
+            .scale {
+                position: relative;
+            }
+
+            /* CHECKBOX */
+             /* Customize the label (the container) */
+            .container {
+                display: block;
+                position: relative;
+                padding-top: 3px;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            /* Hide the browser's default checkbox */
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            /* Create a custom checkbox */
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 20px;
+                width: 30px;
+                background-color: #eee;
+                border-radius: 8px;
+            }
+
+            /* On mouse-over, add a grey background color */
+            .container:hover input ~ .checkmark {
+                background-color: #ccc;
+            }
+
+            /* When the checkbox is checked, add a blue background */
+            .container input:checked ~ .checkmark {
+                background-color: rgb(255, 255, 0);
+                border-radius: 8px;
+            }
+
+            /* Create the checkmark/indicator (hidden when not checked) */
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+
+            /* Show the checkmark when checked */
+            .container input:checked ~ .checkmark:after {
+                display: block;
+            }
+            
+            /* Style the checkmark/indicator */
+            .container .checkmark:after {
+                left: 11px;
+                top: 0px;
+                width: 7px;
+                height: 15px;
+                border: solid rgb(0, 0, 0);
+                border-width: 0 1px 1px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+        </style>
     </head>
-    <body>
-        <h1>S1 - Lecture 3</h1>
-        <ul>
-            <li><a href="./example1/">Example 1</a> – How to call RhinoCompute</li>
-            <li><a href="./example2/">Example 2</a> – Remote Solving GH Definitions</li>
-        </ul>
+    <body style="background-color: rgb(0, 0, 0);"> <!--add style="background-color: purple" to set a background-->
+
+        <div id="loader"></div> 
+        <div class="slidecontainer">
+
+            <div id="sideBar" style="background-color:rgba(0, 0, 0, 0.65);"> <!--style="background-color:rgba(255, 255, 255, 0.65-->
+                <div><h2>ORBITAL GREENHOUSE</h2></div>
+                <div><h3>MODULE DESIGN</h3></div>
+                <div>
+                    <strong>Number of modules</strong> (One: 25% food needs/person. Four: 100%)
+                    <input type="range" id="modules" name="modules" min="1" max="4" value="1" step="1" class="slider">
+                    <span id="modVal"></span><br>
+                    <strong>Maximum root length</strong> (m)
+                    <input type="range" id="root" name="root" min="0.5" max="2.0" value="2.0" step="0.1" class="slider">
+                    <span id="rootVal"></span>
+                </div>
+
+                <div class="radio-toolbar">
+                    <span><strong>Outer skin</strong></span><br>
+                    <input type="radio" id="opaque" name="outerSkin" value="0">
+                    <label for="opaque">Facade</label>
+
+                    <input type="radio" id="frame" name="outerSkin" value="1" checked>
+                    <label for="frame">Str. frame</label> 
+                    
+                    <input type="radio" id="nothing1" name="outerSkin" value="2">
+                    <label for="nothing1">Nothing</label> 
+                </div>
+
+                <div class="radio-toolbar">
+                    <span><strong>Planting pots / diagrams</strong></span><br>
+                    <input type="radio" id="geo" name="innerSkin" value="0" checked>
+                    <label for="geo">Geometry</label>
+
+                    <input type="radio" id="temp" name="innerSkin" value="1">
+                    <label for="temp">Average temp.</label>
+
+                    <input type="radio" id="ph" name="innerSkin" value="2">
+                    <label for="ph">Soil PH</label> 
+                    
+                    <input type="radio" id="roots" name="innerSkin" value="3">
+                    <label for="roots">Root length</label><br>
+
+                    <input type="radio" id="water" name="innerSkin" value="4">
+                    <label for="water">Water needs</label> 
+
+                    <input type="radio" id="height" name="innerSkin" value="5">
+                    <label for="height">Plant height</label> 
+                    
+                    <input type="radio" id="nutrients" name="innerSkin" value="6">
+                    <label for="nutrients">Nutrient type</label> 
+
+                    <input type="radio" id="nothing2" name="innerSkin" value="7">
+                    <label for="nothing2">Nothing</label> 
+                </div><br>
+
+                <div><strong>LEGENDS</strong></div>
+                <!--BOXES LEGEND-->
+                <div class="legend">
+                    <div><strong>Average temperature</strong></div>
+                    <li><span class="temp1"></span>14.5-18ºC</li>
+                    <li><span class="temp2"></span>18-21.5ºC</li>
+                    <li><span class="temp3"></span>21.5-25ºC</li>
+
+                </div><br><br>
+
+                <div class="legend">
+                    <div><strong>PH</strong></div>
+                    <li><span class="ph5"></span>5</li>
+                    <li><span class="ph6"></span>6</li>
+                    <li><span class="ph7"></span>7</li>
+
+                </div><br><br>
+
+                <!--GRADIENT LEGEND-->
+                <div class="row justify-content-center">
+                    <div class="card align-self-center">
+                        <div class="card-body">
+                            <div><strong>Root length </strong>(0.15m to 2.00m)
+                                <div class="scale">
+                                    <div id="gradient-roots"></div>
+                                    <!-- <div class="indicator">Very High</div>
+                                    <div class="indicator">High</div>
+                                    <div class="indicator">Medium</div>
+                                    <div class="indicator">Low</div>
+                                    <div class="indicator">Very Low</div> -->
+                                </div>
+                            </div><br>
+                            <div><strong>Water needs </strong>(100mm to 1000mm)
+                                <div class="scale">
+                                    <div id="gradient-water"></div>
+                                    <!-- <div class="indicator">Very High</div>
+                                    <div class="indicator">High</div>
+                                    <div class="indicator">Medium</div>
+                                    <div class="indicator">Low</div>
+                                    <div class="indicator">Very Low</div> -->
+                                </div>
+                            </div><br>
+                            <div><strong>Plant height </strong>(0.30m to 3.00m)
+                                <div class="scale">
+                                    <div id="gradient-height"></div>
+                                    <!-- <div class="indicator">Very High</div>
+                                    <div class="indicator">High</div>
+                                    <div class="indicator">Medium</div>
+                                    <div class="indicator">Low</div>
+                                    <div class="indicator">Very Low</div> -->
+                                </div>
+                            </div><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div><strong>Nutrient type</strong></div>
+                    <li><span class="prot"></span>Proteins</li>
+                    <li><span class="oils"></span>Oils</li>
+                    <li><span class="carbs"></span>Carbs</li>
+                    <li><span class="flavour"></span>Flavour</li>
+                    <li><span class="water"></span>Fibre</li>
+                    <li><span class="health"></span>Health</li>
+
+                </div><br><br><br><br>
+
+                <div id="aggCheck">
+                    <div><h3>AGGREGATION</h3></div>
+                    <label class="container"><strong>Aggregate?</strong>
+                        <input type="checkbox" id="aggregation">
+                        <span class="checkmark"></span>
+                    </label>
+                </div><br>
+
+                <div>
+                    <strong>Number of modules to aggregate</strong> (More than 23 makes it slow)
+                    <input type="range" id="agg" name="agg" min="1" max="97" value="1" step="1" class="slider">
+                    <span id="aggVal"></span><br>
+
+                    <strong>Number of astronauts</strong>
+                    <input type="range" id="ast" name="ast" min="6" max="148" value="6" step="1" class="slider">
+                    <span id="astVal"></span>
+
+                </div>
+
+                <div>
+                    <p><strong>Percentage of food produced per astronaut</strong></p>
+                </div>
+                <h3><div id="percentage"></div></h3>
+
+                <div id="ui">
+                    <button id="runButton" onclick="run()" disabled>Compute</button><br>
+                    <button id="downloadButton" onclick="download()" disabled>Download</button>
+                </div>
+
+            </div>
+        </div>
+        
+
+
+        <script type="module" src="script.js"></script>
     </body>
 </html>
+
+
+<!-- do i need to create so many buttons? -->
